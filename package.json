@@ -1,0 +1,20 @@
+{
+  "name": "tp_interdisciplinar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node src/index.js"
+  },
+  "author": "thiagohenrique7 <thiagohenriquean@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.1.2",
+    "sequelize": "^6.11.0",
+    "yarn": "^1.22.19"
+  },
+  "repository": "https://github.com/thiagohenrique7/tp_interdisciplinar.git"
+}
