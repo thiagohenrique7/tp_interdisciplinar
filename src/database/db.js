@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize');
 require('dotenv/config');
-
 const sequelize = new Sequelize(
-    process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS,
+    'ativcomplementar', 'root', 'santoss710',
     {
     dialect: 'mysql',
     host: '127.0.0.1',
