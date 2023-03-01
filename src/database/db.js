@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
-    'ativcomplementar', 'root', 'santoss710',
+    'ativcomplementar', 'root', 'senha',
     {
     dialect: 'mysql',
     host: '127.0.0.1',
