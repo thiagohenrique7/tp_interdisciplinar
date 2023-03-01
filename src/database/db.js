@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 require('dotenv/config');
 const sequelize = new Sequelize(
-    'ativcomplementar', 'root', 'santoss710',
+    'sql9602173', 'sql9602173', 'YkzPWmHElf',
     {
     dialect: 'mysql',
-    host: '127.0.0.1',
+    host: 'sql9.freesqldatabase.com',
     port: 3306
   })
  
