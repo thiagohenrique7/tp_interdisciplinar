@@ -1,10 +1,11 @@
 const Sequelize = require('sequelize');
 require('dotenv/config');
+
 const sequelize = new Sequelize(
-    'sql9602173', 'sql9602173', 'YkzPWmHElf',
+    process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD,
     {
     dialect: 'mysql',
-    host: 'sql9.freesqldatabase.com',
+    host:  process.env.DB_HOST,
     port: 3306
   })
  
