@@ -6,13 +6,11 @@ async function createAtividade(item){
 }
 async function getAtividadesPoId(idUser){
     console.log("TESTE", idUser)
-    const atividades = await atividadeModel.findAll({
+    return await atividadeModel.findAll({
         where:{
             id_user: idUser
         }
     })
-    console.log(atividades)
-    return atividades;
 }
 
 async function updateStatusAtividade(item){
