@@ -30,8 +30,10 @@ router.post("/register", (req, res) => {
         })
 })
 
-router.get('/atividades/:userId', (req, res, next) => {
-    atividadeController.getAtividadesPoId(req.params.userId).then((atividades) => res.json(atividades))
+router.get('/atividades/:userId/:tipoId', (req, res, next) => {
+    let params = { idTipo: req.params.tipoId, idUser: req.params.userId }
+    console.log("teste", params)
+    atividadeController.getAtividadesPoId(params).then((atividades) => res.json(atividades))
         .catch((err) => {
             return res.status(400).json(err)
         });
@@ -81,8 +83,9 @@ router.post('/atividade', (req, res, next) => {
 
 })
 router.post('/avalia_atividade', (req, res, next) => {
-    avaliaAtividadeController.createAvaliaAtividade(req.body).then(() => { 
-        atividadeController.updateStatusAtividade({ avaliacao: req.body.avaliacao, id_atividade: req.body.id_atividade }) }).then((avaliada) => {
+    avaliaAtividadeController.createAvaliaAtividade(req.body).then(() => {
+        atividadeController.updateStatusAtividade({ avaliacao: req.body.avaliacao, id_atividade: req.body.id_atividade })
+    }).then((avaliada) => {
         res.json(avaliada)
     }).catch((err) => {
         res.json(err)

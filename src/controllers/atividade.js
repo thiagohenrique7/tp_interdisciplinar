@@ -12,11 +12,12 @@ async function deleteAtividade(id_ativ){
         }
     });
 }
-async function getAtividadesPoId(idUser){
-    console.log("TESTE", idUser)
+async function getAtividadesPoId(item){
+    console.log("TESTE", item)
     return await atividadeModel.findAll({
         where:{
-            id_user: idUser
+            id_user: item.idUser,
+            tipo_id: item.idTipo
         }
     })
 }
