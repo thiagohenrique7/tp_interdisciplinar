@@ -13,18 +13,26 @@ router.use(cors({
 }))
 
 router.post("/register", (req, res) => {
-    console.log(req)
-    return res.json({sucess: "ok"})
+    console.log("CHEGUEIIIII")
+    userController.createUser({
+        RA: req.body.RA,
+        nome: req.body.nome,
+        curso: req.body.curso,
+        dataNasc: req.body.dataNasc,
+        email: req.body.email,
+        telefone: req.body.telefone,
+        password: req.body.password,
+        user_type: 0
+
+    }).then((login) => res.json(login))
+        .catch((err) => {
+            return res.status(400).json(err)
+        })
 })
 router.get('/users', (req, res, next) => {
-    res.setHeader('content-type', 'application/json');
-    userController.getUsers().then((users) => {
-        res.setHeader('content-type', 'application/json');
-        res.json(users)
-    })
+    userController.getUsers().then((users) => res.json(users))
         .catch((err) => {
-            console.log('Erro na consulta', JSON.stringify(err))
-            return res.json(err)
+            return res.status(400).json(err)
         });
 });
 
