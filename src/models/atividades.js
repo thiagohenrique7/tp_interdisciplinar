@@ -12,27 +12,20 @@ const Atividades = database.define('atividades',{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    grupo:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
-    },
     tipo_id:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    date_created:{
+    descricao:{
         type: Sequelize.STRING,
         allowNull: false,
     },
-    titulo:{
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    avaliada:{
+    status:{
         type: Sequelize.INTEGER,
         allowNull: true,
         defaultValue: 0
     },
+
 
 })
 

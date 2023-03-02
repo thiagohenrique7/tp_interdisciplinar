@@ -3,13 +3,14 @@ const router = express.Router()
 const userController = require('../controllers/user')
 const atividadeController = require('../controllers/atividade')
 const cadastroAtividadeController = require('../controllers/cadastraAtividade')
+const avaliaAtividadeController = require('../controllers/avaliaAtividade')
 const jwt = require('jsonwebtoken')
 const SECRET = 'tpinterdisciplinarbsi2023'
 const cors = require('cors');
 
 router.use(cors({
     origin: '*',
-    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }))
 
 router.post("/register", (req, res) => {
@@ -29,6 +30,7 @@ router.post("/register", (req, res) => {
             return res.status(400).json(err)
         })
 })
+
 router.get('/users', (req, res, next) => {
     userController.getUsers().then((users) => res.json(users))
         .catch((err) => {
@@ -44,7 +46,7 @@ router.post('/login', (req, res, next) => {
     }).then((resp) => {
         if (resp.sucess == true) {
             console.log("SUCESS")
-            const token = jwt.sign({ userId: resp.user.id }, SECRET, { expiresIn: 1800 })
+            const token = jwt.sign({ user_id: resp.user.id }, SECRET, { expiresIn: 1900 })
             res.json({ auth: true, user: resp.user, token: token })
         } else {
             res.status(401).end()
@@ -55,18 +57,26 @@ router.post('/login', (req, res, next) => {
 })
 
 router.post('/atividade', (req, res, next) => {
-    console.log("NOVA ATIVIDADE")
+
     atividadeController.createAtividade(req.body).then((ativ) => {
         cadastroAtividadeController.createCadastroAtividade({
-            id_user: req.body.userId,
+            id_user: req.body.user_id,
             id_atividade: ativ.id
         }).then((cadastro) => {
-            res.json({sucess: true, mensagem: "Atividade cadastrada com sucesso", ativ: ativ, cadastro: cadastro})
+            res.json({ sucess: true, mensagem: "Atividade cadastrada com sucesso", ativ: ativ, cadastro: cadastro })
         })
     }).catch((err) => {
         res.json(err)
     })
 
+})
+router.post('/avalia_atividade', (req, res, next) => {
+    avaliaAtividadeController.createAvaliaAtividade(req.body).then(() => { 
+        atividadeController.updateStatusAtividade({ status: req.body.avaliacao, id_atividade: req.body.id_atividade }) }).then((avaliada) => {
+        res.json(avaliada)
+    }).catch((err) => {
+        res.json(err)
+    })
 })
 
 module.exports = router

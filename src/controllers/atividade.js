@@ -5,4 +5,12 @@ async function createAtividade(item){
     return atividadeModel.create(item);
 }
 
-module.exports = {createAtividade}
+async function updateStatusAtividade(item){
+    return atividadeModel.update({status: item.avaliacao},{
+        where:{
+            id: item.id_atividade
+        }
+    });
+}
+
+module.exports = {createAtividade, updateStatusAtividade}
