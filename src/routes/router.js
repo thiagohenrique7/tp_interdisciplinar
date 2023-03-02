@@ -30,8 +30,8 @@ router.post("/register", (req, res) => {
         })
 })
 
-router.get('/atividades', (req, res, next) => {
-    atividadeController.getAtividadesPoId(req.body.user_id).then((atividades) => res.json(atividades))
+router.get('/atividades/:userId', (req, res, next) => {
+    atividadeController.getAtividadesPoId(req.params.userId).then((atividades) => res.json(atividades))
         .catch((err) => {
             return res.status(400).json(err)
         });
