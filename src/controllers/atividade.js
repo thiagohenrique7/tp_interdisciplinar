@@ -4,6 +4,14 @@ async function createAtividade(item){
     console.log("TESTE", item)
     return atividadeModel.create(item);
 }
+async function deleteAtividade(id_ativ){
+    console.log("TESTE", id_ativ)
+    return atividadeModel.destroy({
+        where:{
+            id: id_ativ
+        }
+    });
+}
 async function getAtividadesPoId(idUser){
     console.log("TESTE", idUser)
     return await atividadeModel.findAll({
@@ -22,4 +30,4 @@ async function updateStatusAtividade(item){
     });
 }
 
-module.exports = {createAtividade, updateStatusAtividade, getAtividadesPoId}
+module.exports = {createAtividade, updateStatusAtividade, getAtividadesPoId, deleteAtividade}

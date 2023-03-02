@@ -62,6 +62,15 @@ router.post('/login', (req, res, next) => {
     })
 })
 
+router.delete('/atividade/:id_atividade', (req, res, next) => {
+
+    atividadeController.deleteAtividade(req.params.id_atividade).then((ativ) => {
+        res.json({ sucess: true, mensagem: "Atividade deletada com sucesso", ativ: ativ })
+    }).catch((err) => {
+        res.json(err)
+    })
+
+})
 router.post('/atividade', (req, res, next) => {
 
     atividadeController.createAtividade(req.body).then((ativ) => {
