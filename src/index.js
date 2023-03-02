@@ -2,12 +2,10 @@ port = 3003
 const express = require('express')
 const app = express()
 const database = require('./database/db')
-var cors = require('cors')
-
 
 database.sync(() => console.log("BANCO DE DADOS CONECTADO"));
 
-app.use(cors())
+app.use(express.json())
 
 const routers = require("./routes/router")
 

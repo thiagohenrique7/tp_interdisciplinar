@@ -5,29 +5,26 @@ const atividadeController = require('../controllers/atividade')
 const cadastroAtividadeController = require('../controllers/cadastraAtividade')
 const jwt = require('jsonwebtoken')
 const SECRET = 'tpinterdisciplinarbsi2023'
+const cors = require('cors');
+
+router.use(cors({
+    origin: '*',
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}))
 
 router.post("/register", (req, res) => {
-    userController.createUser({
-        RA: req.body.RA,
-        nome: req.body.nome,
-        curso: req.body.curso,
-        dataNasc: req.body.dataNasc,
-        email: req.body.email,
-        telefone: req.body.telefone,
-        password: req.body.password,
-        user_type: 0
-
-    }).then((login) => res.send(login))
-        .catch((err) => {
-            console.log('Erro no cadastro do item', JSON.stringify(err))
-            return res.status(400).send(err)
-        })
+    console.log(req)
+    return res.json({sucess: "ok"})
 })
 router.get('/users', (req, res, next) => {
-    userController.getUsers().then((users) => res.send(users))
+    res.setHeader('content-type', 'application/json');
+    userController.getUsers().then((users) => {
+        res.setHeader('content-type', 'application/json');
+        res.json(users)
+    })
         .catch((err) => {
             console.log('Erro na consulta', JSON.stringify(err))
-            return res.send(err)
+            return res.json(err)
         });
 });
 
@@ -40,12 +37,12 @@ router.post('/login', (req, res, next) => {
         if (resp.sucess == true) {
             console.log("SUCESS")
             const token = jwt.sign({ userId: resp.user.id }, SECRET, { expiresIn: 1800 })
-            res.send({ auth: true, user: resp.user, token: token })
+            res.json({ auth: true, user: resp.user, token: token })
         } else {
             res.status(401).end()
         }
     }).catch((err) => {
-        return res.send(err)
+        return res.json(err)
     })
 })
 
@@ -56,10 +53,10 @@ router.post('/atividade', (req, res, next) => {
             id_user: req.body.userId,
             id_atividade: ativ.id
         }).then((cadastro) => {
-            res.send({sucess: true, mensagem: "Atividade cadastrada com sucesso", ativ: ativ, cadastro: cadastro})
+            res.json({sucess: true, mensagem: "Atividade cadastrada com sucesso", ativ: ativ, cadastro: cadastro})
         })
     }).catch((err) => {
-        res.send(err)
+        res.json(err)
     })
 
 })
