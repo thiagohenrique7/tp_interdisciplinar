@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const userController = require('../controllers/user')
 const atividadeController = require('../controllers/atividade')
-const cadastroAtividadeController = require('../controllers/cadastraAtividade')
+
 const avaliaAtividadeController = require('../controllers/avaliaAtividade')
 const jwt = require('jsonwebtoken')
 const SECRET = 'tpinterdisciplinarbsi2023'
@@ -14,7 +14,6 @@ router.use(cors({
 }))
 
 router.post("/register", (req, res) => {
-    console.log("CHEGUEIIIII")
     userController.createUser({
         RA: req.body.RA,
         nome: req.body.nome,
@@ -30,6 +29,13 @@ router.post("/register", (req, res) => {
             return res.status(400).json(err)
         })
 })
+
+router.get('/atividades', (req, res, next) => {
+    atividadeController.getAtividadesPoId(req.body.user_id).then((atividades) => res.json(atividades))
+        .catch((err) => {
+            return res.status(400).json(err)
+        });
+});
 
 router.get('/users', (req, res, next) => {
     userController.getUsers().then((users) => res.json(users))
@@ -59,12 +65,7 @@ router.post('/login', (req, res, next) => {
 router.post('/atividade', (req, res, next) => {
 
     atividadeController.createAtividade(req.body).then((ativ) => {
-        cadastroAtividadeController.createCadastroAtividade({
-            id_user: req.body.user_id,
-            id_atividade: ativ.id
-        }).then((cadastro) => {
-            res.json({ sucess: true, mensagem: "Atividade cadastrada com sucesso", ativ: ativ, cadastro: cadastro })
-        })
+        res.json({ sucess: true, mensagem: "Atividade cadastrada com sucesso", ativ: ativ })
     }).catch((err) => {
         res.json(err)
     })
@@ -72,7 +73,7 @@ router.post('/atividade', (req, res, next) => {
 })
 router.post('/avalia_atividade', (req, res, next) => {
     avaliaAtividadeController.createAvaliaAtividade(req.body).then(() => { 
-        atividadeController.updateStatusAtividade({ status: req.body.avaliacao, id_atividade: req.body.id_atividade }) }).then((avaliada) => {
+        atividadeController.updateStatusAtividade({ avaliacao: req.body.avaliacao, id_atividade: req.body.id_atividade }) }).then((avaliada) => {
         res.json(avaliada)
     }).catch((err) => {
         res.json(err)

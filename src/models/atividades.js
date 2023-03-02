@@ -25,6 +25,10 @@ const Atividades = database.define('atividades',{
         allowNull: true,
         defaultValue: 0
     },
+    id_user:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    }
 
 
 })
