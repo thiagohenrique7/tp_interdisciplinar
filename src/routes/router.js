@@ -13,6 +13,10 @@ router.use(cors({
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }))
 
+router.get("/", (req, res) => {
+    res.status(200).json({message: "API feita para o trabalho interdicisplinar do curso de BSI -IFMG"})
+})
+
 router.post("/register", (req, res) => {
     userController.createUser({
         RA: req.body.RA,
