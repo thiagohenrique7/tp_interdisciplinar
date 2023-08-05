@@ -15,6 +15,7 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.1.2",
     "sequelize": "^6.11.0",
+    "tedious": "^16.4.0",
     "yarn": "^1.22.19"
   },
   "repository": "https://github.com/thiagohenrique7/tp_interdisciplinar.git"
