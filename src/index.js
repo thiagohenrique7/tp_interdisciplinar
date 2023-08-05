@@ -5,6 +5,7 @@ const database = require('./database/db')
 
 database.sync(() => console.log("BANCO DE DADOS CONECTADO"));
 
+console.log(database)
 app.use(express.json())
 
 const routers = require("./routes/router")
