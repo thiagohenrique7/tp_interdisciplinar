@@ -59,8 +59,11 @@ router.post('/login', (req, res, next) => {
         if (resp.sucess == true) {
             console.log("SUCESS")
             const token = jwt.sign({ user_id: resp.user.id }, SECRET, { expiresIn: 1900 })
-            res.json({ auth: true, user: resp.user, token: token })
+            let respostaReturn = { auth: true, user: resp.user, token: token }
+            console.log(respostaReturn)
+            res.json(respostaReturn)
         } else {
+            console.log("ERROU AO AUTENTICAR")
             res.status(401).end()
         }
     }).catch((err) => {
