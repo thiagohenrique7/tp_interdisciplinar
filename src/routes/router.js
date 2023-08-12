@@ -69,7 +69,7 @@ router.post('/login', (req, res, next) => {
         }
     }).catch((err) => {
         console.log("OUTRO ERRO", err)
-        return res.json(err)
+        return res.json(err).status(401)
     })
 })
 
