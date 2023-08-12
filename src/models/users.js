@@ -9,7 +9,7 @@ const Users = database.define('users', {
         primaryKey: true
     },
     RA: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     nome: {
