@@ -51,7 +51,8 @@ router.get('/users', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-    console.log("LOGIN")
+    console.log("LOGIN", req.body.user )
+    console.log("PASSWORD", req.body.password )
     userController.getUserLogin({
         user: req.body.user,
         password: req.body.password
@@ -67,6 +68,7 @@ router.post('/login', (req, res, next) => {
             res.status(401).end()
         }
     }).catch((err) => {
+        console.log("OUTRO ERRO", err)
         return res.json(err)
     })
 })
