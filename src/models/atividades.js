@@ -16,6 +16,10 @@ const Atividades = database.define('atividades',{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    titulo:{
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     descricao:{
         type: Sequelize.STRING,
         allowNull: false,
